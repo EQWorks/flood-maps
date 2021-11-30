@@ -12,11 +12,11 @@ const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN || ''
 
 const CompareMap = () => {
   const [viewport, setViewport] = useState({
-    latitude: 49.036608,
-    longitude: -122.222293,
+    latitude: 49.068,
+    longitude: -122.15,
     bearing: 0,
     pitch: 0,
-    zoom: 15,
+    zoom: 11.6,
   })
 
   const beforeRef = useRef()
@@ -42,21 +42,16 @@ const CompareMap = () => {
         {...viewport}
         width='81vw'
         height='88vh'
-        onViewportChange={viewport => setViewport(viewport)}
+        onViewportChange={newViewport => setViewport(newViewport)}
         style={style}
-        mapStyle='mapbox://styles/mapbox/dark-v10'
+        mapStyle='mapbox://styles/dilshaneq/cjrl1169p0v4t2sqonjvr3ynz'
         mapboxApiAccessToken={MAPBOX_TOKEN}
       >
         <Source
           id='before-image'
           type='raster'
-          url='mapbox://mapbox.satellite'
-          coordinates={[
-            [-122.234959, 49.041818],
-            [-122.208633, 49.041818],
-            [-122.208633, 49.032149],
-            [-122.234959, 49.032149],
-          ]}
+          url='mapbox://dilshaneq.82h26l9b'
+          tileSize={256}
         />
         <Layer
           id='overlay'
@@ -69,7 +64,7 @@ const CompareMap = () => {
         {...viewport}
         width='81vw'
         height='88vh'
-        onViewportChange={viewport => setViewport(viewport)}
+        onViewportChange={newViewport => setViewport(newViewport)}
         style={style}
         mapStyle='mapbox://styles/dilshaneq/cjrl1169p0v4t2sqonjvr3ynz'
         mapboxApiAccessToken={MAPBOX_TOKEN}
@@ -77,13 +72,8 @@ const CompareMap = () => {
         <Source
           id='after-image'
           type='raster'
-          url='mapbox://dilshaneq.cjdmu22ef00f82woxeuoqs3kk-6erkb'
-          coordinates={[
-            [-122.234959, 49.041818],
-            [-122.208633, 49.041818],
-            [-122.208633, 49.032149],
-            [-122.234959, 49.032149],
-          ]}
+          url='mapbox://dilshaneq.24562f8s'
+          tileSize={256}
         />
         <Layer
           id='overlay'
