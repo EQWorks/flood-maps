@@ -7,15 +7,12 @@
     "lint": "eslint src/",
     "start": "env $(print-env) react-scripts start",
     "build": "babel src --out-dir dist --copy-files",
-    "test": "react-scripts test"
+    "test": "echo 'No tests yet, shay-shay-shame~'"
   },
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
     "@mui/material": "^5.2.0",
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
     "mapbox-gl": ">=0.32.1 <2.0.0",
     "mapbox-gl-compare": "^0.4.0",
     "react": "^17.0.2",
