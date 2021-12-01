@@ -2,20 +2,24 @@
   "name": "flood-maps",
   "version": "0.1.0",
   "private": true,
+  "author": "EQ Inc.",
+  "scripts": {
+    "lint": "eslint src/",
+    "start": "env $(print-env) react-scripts start",
+    "build": "babel src --out-dir dist --copy-files",
+    "test": "echo 'No tests yet, shay-shay-shame~'"
+  },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
+    "@emotion/react": "^11.6.0",
+    "@emotion/styled": "^11.6.0",
+    "@mui/material": "^5.2.0",
+    "mapbox-gl": ">=0.32.1 <2.0.0",
+    "mapbox-gl-compare": "^0.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-map-gl": "^6.1.17",
     "react-scripts": "4.0.3",
-    "web-vitals": "^1.0.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "use-debounce": "^7.0.1"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +38,16 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.16.0",
+    "@babel/core": "^7.16.0",
+    "@babel/eslint-parser": "^7.16.3",
+    "@babel/preset-env": "^7.16.4",
+    "@babel/preset-react": "^7.16.0",
+    "eslint": "^7.11.0",
+    "eslint-plugin-import": "^2.25.3",
+    "eslint-plugin-react": "^7.27.1",
+    "eslint-plugin-react-hooks": "^4.3.0"
   }
 }
