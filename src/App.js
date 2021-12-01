@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import Grid from '@mui/material/Grid'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
@@ -15,15 +15,17 @@ const customTheme = createTheme({
 })
 
 const App = () => {
+  const [location, setLocation] = useState('')
+
   return (
     <ThemeProvider theme={customTheme}>
       <TopBar />
       <Grid container spacing={2} >
         <Grid item sm={2}>
-          <Controls />
+          <Controls setTargetLocation={setLocation} />
         </Grid>
         <Grid item sm={10}>
-          <CompareMap />
+          <CompareMap location={location}/>
         </Grid>
       </Grid>
     </ThemeProvider>

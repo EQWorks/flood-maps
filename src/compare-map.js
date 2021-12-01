@@ -1,6 +1,7 @@
 // https://codesandbox.io/s/dcesq?file=/src/App.js:0-1944
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
+import PropTypes from 'prop-types'
 
 import MapGL, { Source, Layer } from 'react-map-gl'
 import MapboxCompare from 'mapbox-gl-compare'
@@ -8,6 +9,8 @@ import 'mapbox-gl/dist/mapbox-gl.css'
 import 'mapbox-gl-compare/dist/mapbox-gl-compare.css'
 
 import { useDebounce } from 'use-debounce'
+
+import { locations } from './constants'
 
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN || ''
@@ -17,18 +20,25 @@ const style = {
   bottom: 0,
 }
 
-const CompareMap = () => {
+const CompareMap = ({ location }) => {
   const [newViewport, setNewViewport] = useState({
     latitude: 49.068,
     longitude: -122.15,
-    bearing: 0,
-    pitch: 0,
     zoom: 11.6,
   })
   const [viewport] = useDebounce(newViewport, 20)
 
   const beforeRef = useRef()
   const afterRef = useRef()
+
+  useEffect(() => {
+    if (location) {
+      setNewViewport({
+        ...locations[location],
+        zoom: location === 'Area map' ? 11.5 : 13.5,
+      })
+    }
+  }, [location])
 
   useEffect(() => {
     const beforeMap = beforeRef.current.getMap()
@@ -102,6 +112,14 @@ const CompareMap = () => {
   ), [viewport, changedViewport])
 
   return compareMap
+}
+
+CompareMap.propTypes = {
+  location: PropTypes.string,
+}
+
+CompareMap.defaultProps = {
+  location: 'Area map',
 }
 
 export default CompareMap
