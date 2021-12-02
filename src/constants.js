@@ -1,4 +1,4 @@
-export const locations = {
+export const LOCATIONS = {
   'Area map' : {
     latitude: 49.068,
     longitude: -122.15,

@@ -7,7 +7,7 @@ import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Typography from '@mui/material/Typography'
 
-import { locations } from './constants'
+import { LOCATIONS } from './constants'
 
 
 const Controls = ({ setTargetLocation }) => {
@@ -27,7 +27,7 @@ const Controls = ({ setTargetLocation }) => {
             setLocation(value)
           }}
           sx={{ marginBottom: '20px' }}
-        > {Object.keys(locations).map((loc, i) => (
+        > {Object.keys(LOCATIONS).map((loc, i) => (
             <MenuItem key={i} value={loc}>{loc}</MenuItem>
           ))}
         </Select>

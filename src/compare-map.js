@@ -10,7 +10,7 @@ import 'mapbox-gl-compare/dist/mapbox-gl-compare.css'
 
 import { useDebounce } from 'use-debounce'
 
-import { locations } from './constants'
+import { LOCATIONS } from './constants'
 
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN || ''
@@ -34,7 +34,7 @@ const CompareMap = ({ location }) => {
   useEffect(() => {
     if (location) {
       setNewViewport({
-        ...locations[location],
+        ...LOCATIONS[location],
         zoom: location === 'Area map' ? 11.5 : 13.5,
       })
     }
