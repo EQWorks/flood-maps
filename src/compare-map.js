@@ -4,9 +4,17 @@ import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 
 import MapGL, { Source, Layer } from 'react-map-gl'
+import mapboxgl from 'mapbox-gl'
 import MapboxCompare from 'mapbox-gl-compare'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import 'mapbox-gl-compare/dist/mapbox-gl-compare.css'
+
+
+// https://github.com/mapbox/mapbox-gl-js/issues/10565
+// https://stackoverflow.com/a/69489231
+// // eslint-disable-next-line import/no-webpack-loader-syntax, import/no-unresolved
+mapboxgl.workerClass = require('worker-loader!mapbox-gl/dist/mapbox-gl-csp-worker').default
+
 
 import { useDebounce } from 'use-debounce'
 
