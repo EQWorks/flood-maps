@@ -1,3 +1,7 @@
+[build]
+  command = "yarn build"
+  publish = "build/"
+
 [[redirects]]
   from = "/*"
   to = "/"
@@ -6,7 +10,6 @@
 
 [build.environment]
   # https://community.netlify.com/t/support-guide-using-private-npm-modules-on-netlify/795/65
-  NPM_CONFIG_USERCONFIG = "./.netlify/.npmrc"
   YARN_VERSION = "1.22.10"
 
 [context.production.environment]
