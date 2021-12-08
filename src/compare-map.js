@@ -11,6 +11,7 @@ import 'mapbox-gl-compare/dist/mapbox-gl-compare.css'
 import { useDebounce } from 'use-debounce'
 
 import { LOCATIONS } from './constants'
+import floodLevel from './data/flood_polygons.json'
 
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN || ''
@@ -18,6 +19,15 @@ const style = {
   position: 'absolute',
   top: 100,
   bottom: 0,
+}
+
+const floodLevelStyle = {
+  id: 'flood_level_layer',
+  type: 'fill',
+  paint: {
+    'fill-color': '#0080ff', // blue color fill
+    'fill-opacity': 0.4,
+  },
 }
 
 const CompareMap = ({ location }) => {
@@ -107,6 +117,13 @@ const CompareMap = ({ location }) => {
           source='after-image'
           type='raster'
         />
+        <Source
+          id='flood_level'
+          type='geojson'
+          data={floodLevel}
+        >
+          <Layer {...floodLevelStyle} />
+        </Source>
       </MapGL>
     </div>
   ), [viewport, changedViewport])
