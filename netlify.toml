@@ -11,8 +11,17 @@
 [build.environment]
   # https://community.netlify.com/t/support-guide-using-private-npm-modules-on-netlify/795/65
   YARN_VERSION = "1.22.10"
+  NPM_CONFIG_USERCONFIG = "./.netlify/.npmrc"
+  REACT_APP_API_HOST = "https://api.locus.place"
+  REACT_APP_API_STAGE = "dev"
+  REACT_APP_KEY_WARDEN_HOST = "https://auth.eqworks.io"
+  REACT_APP_KEY_WARDEN_STAGE = "dev"
 
 [context.production.environment]
+  REACT_APP_API_HOST = "https://api.locus.place"
+  REACT_APP_API_STAGE = "prod"
+  REACT_APP_KEY_WARDEN_HOST = "https://auth.eqworks.io"
+  REACT_APP_KEY_WARDEN_STAGE = "prod"
 
 [context.deploy-preview]
   ignore = "git diff --quiet HEAD^ HEAD src/ index.html package.json yarn.lock"
