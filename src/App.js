@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 
+import { Authenticated } from '@eqworks/common-login'
 import Grid from '@mui/material/Grid'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 
@@ -19,23 +20,25 @@ const App = () => {
   const [showBuildings, setShowBuildings] = useState(true)
 
   return (
-    <ThemeProvider theme={customTheme}>
-      <TopBar />
-      <Grid container spacing={2} >
-        <Grid item sm={2}>
-          <Controls
-            setTargetLocation={setLocation}
-            setShowMapBuildings={setShowBuildings}
-          />
+    <Authenticated product='locus'>
+      <ThemeProvider theme={customTheme}>
+        <TopBar />
+        <Grid container spacing={2} >
+          <Grid item sm={2}>
+            <Controls
+              setTargetLocation={setLocation}
+              setShowMapBuildings={setShowBuildings}
+            />
+          </Grid>
+          <Grid item sm={10}>
+            <CompareMap
+              location={location}
+              showBuildings={showBuildings}
+            />
+          </Grid>
         </Grid>
-        <Grid item sm={10}>
-          <CompareMap
-            location={location}
-            showBuildings={showBuildings}
-          />
-        </Grid>
-      </Grid>
-    </ThemeProvider>
+      </ThemeProvider>
+    </Authenticated>
   )
 }
 
