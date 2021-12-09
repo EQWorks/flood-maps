@@ -9,7 +9,7 @@ export const LOCATIONS = {
   },
   'Arnold' :{
     longitude: -122.152839,
-    latitude: 49.009589,
+    latitude: 49.0185,
   },
   'Central Sumas' : {
     longitude: -122.172691,
