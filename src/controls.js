@@ -6,12 +6,28 @@ import MenuItem from '@mui/material/MenuItem'
 import FormControl from '@mui/material/FormControl'
 import Select from '@mui/material/Select'
 import Typography from '@mui/material/Typography'
+import Switch from '@mui/material/Switch'
+import FormControlLabel from '@mui/material/FormControlLabel'
+import { alpha, styled } from '@mui/material/styles'
 
 import { LOCATIONS } from './constants'
 
 
-const Controls = ({ setTargetLocation }) => {
+const CustomSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: '#3887be',
+    '&:hover': {
+      backgroundColor: alpha('#3887be', theme.palette.action.hoverOpacity),
+    },
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: '#3887be',
+  },
+}))
+
+const Controls = ({ setTargetLocation, setShowMapBuildings }) => {
   const [location, setLocation] = useState('Area map')
+  const [showBuildings, setShowBuildings] = useState(true)
 
   return (
     <Box sx={{ margin: '20px' }}
@@ -56,12 +72,23 @@ const Controls = ({ setTargetLocation }) => {
           <MenuItem value='Friday, November 19'>Friday, November 19</MenuItem>
         </Select>
       </FormControl>
+      <FormControlLabel
+        value={showBuildings}
+        control={<CustomSwitch defaultChecked/>}
+        label='Show Buildings'
+        labelPlacement='end'
+        onChange={() => {
+          setShowMapBuildings(!showBuildings)
+          setShowBuildings(!showBuildings)
+        }}
+      />
     </Box>
   )
 }
 
 Controls.propTypes = {
   setTargetLocation: PropTypes.func.isRequired,
+  setShowMapBuildings: PropTypes.func.isRequired,
 }
 
 export default Controls
