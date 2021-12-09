@@ -12,6 +12,8 @@ import { useDebounce } from 'use-debounce'
 
 import { LOCATIONS } from './constants'
 import floodLevel from './data/flood_polygons.json'
+import buildingsBefore from './data/bb_abbots.json'
+import buildingsAfter from './data/bldgs_affected.json'
 
 
 const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN || ''
@@ -25,12 +27,28 @@ const floodLevelStyle = {
   id: 'flood_level_layer',
   type: 'fill',
   paint: {
-    'fill-color': '#0080ff', // blue color fill
+    'fill-color': '#0080ff',
     'fill-opacity': 0.4,
   },
 }
 
-const CompareMap = ({ location }) => {
+const buildingsBeforeStyle = {
+  id: 'buildings_before_layer',
+  type: 'fill',
+  paint: {
+    'fill-color': '#be40bf',
+  },
+}
+
+const buildingsAfterStyle = {
+  id: 'buildings_before_layer',
+  type: 'fill',
+  paint: {
+    'fill-color': '#fbc94e',
+  },
+}
+
+const CompareMap = ({ location, showBuildings }) => {
   const [newViewport, setNewViewport] = useState({
     latitude: 49.068,
     longitude: -122.15,
@@ -91,6 +109,15 @@ const CompareMap = ({ location }) => {
           source='before-image'
           type='raster'
         />
+        {showBuildings &&
+          <Source
+            id='buildings_before'
+            type='geojson'
+            data={buildingsBefore}
+          >
+            <Layer {...buildingsBeforeStyle} />
+          </Source>
+        }
       </MapGL>
       <MapGL
         ref={afterRef}
@@ -124,19 +151,30 @@ const CompareMap = ({ location }) => {
         >
           <Layer {...floodLevelStyle} />
         </Source>
+        {showBuildings &&
+          <Source
+            id='buildings_after'
+            type='geojson'
+            data={buildingsAfter}
+          >
+            <Layer {...buildingsAfterStyle} />
+          </Source>
+        }
       </MapGL>
     </div>
-  ), [viewport, changedViewport])
+  ), [viewport, changedViewport, showBuildings])
 
   return compareMap
 }
 
 CompareMap.propTypes = {
   location: PropTypes.string,
+  showBuildings: PropTypes.bool,
 }
 
 CompareMap.defaultProps = {
   location: 'Area map',
+  showBuildings: true,
 }
 
 export default CompareMap
