@@ -23,31 +23,6 @@ const style = {
   bottom: 0,
 }
 
-const floodLevelStyle = {
-  id: 'flood_level_layer',
-  type: 'fill',
-  paint: {
-    'fill-color': '#0080ff',
-    'fill-opacity': 0.4,
-  },
-}
-
-const buildingsBeforeStyle = {
-  id: 'buildings_before_layer',
-  type: 'fill',
-  paint: {
-    'fill-color': '#be40bf',
-  },
-}
-
-const buildingsAfterStyle = {
-  id: 'buildings_before_layer',
-  type: 'fill',
-  paint: {
-    'fill-color': '#fbc94e',
-  },
-}
-
 const CompareMap = ({ location, showBuildings, showFlood }) => {
   const [newViewport, setNewViewport] = useState({
     latitude: 49.068,
@@ -58,6 +33,40 @@ const CompareMap = ({ location, showBuildings, showFlood }) => {
 
   const beforeRef = useRef()
   const afterRef = useRef()
+
+  const floodLevelStyle = useMemo(() => ({
+    id: 'flood_level_layer',
+    type: 'fill',
+    paint: {
+      'fill-color': '#0080ff',
+      'fill-opacity': 0.4,
+    },
+    layout: {
+      'visibility' : showFlood ? 'visible' : 'none',
+    },
+  }), [showFlood])
+
+  const buildingsBeforeStyle = useMemo(() => ({
+    id: 'buildings_before_layer',
+    type: 'fill',
+    paint: {
+      'fill-color': '#be40bf',
+    },
+    layout: {
+      'visibility' : showBuildings ? 'visible' : 'none',
+    },
+  }), [showBuildings])
+
+  const buildingsAfterStyle = useMemo(() => ({
+    id: 'buildings_before_layer',
+    type: 'fill',
+    paint: {
+      'fill-color': '#fbc94e',
+    },
+    layout: {
+      'visibility' : showBuildings ? 'visible' : 'none',
+    },
+  }), [showBuildings])
 
   useEffect(() => {
     if (location) {
@@ -109,15 +118,13 @@ const CompareMap = ({ location, showBuildings, showFlood }) => {
           source='before-image'
           type='raster'
         />
-        {showBuildings &&
-          <Source
-            id='buildings_before'
-            type='geojson'
-            data={buildingsBefore}
-          >
-            <Layer {...buildingsBeforeStyle} />
-          </Source>
-        }
+        <Source
+          id='buildings_before'
+          type='geojson'
+          data={buildingsBefore}
+        >
+          <Layer {...buildingsBeforeStyle} />
+        </Source>
       </MapGL>
       <MapGL
         ref={afterRef}
@@ -144,27 +151,29 @@ const CompareMap = ({ location, showBuildings, showFlood }) => {
           source='after-image'
           type='raster'
         />
-        {showFlood &&
-          <Source
-            id='flood_level'
-            type='geojson'
-            data={floodLevel}
-          >
-            <Layer {...floodLevelStyle} />
-          </Source>
-        }
-        {showBuildings &&
-          <Source
-            id='buildings_after'
-            type='geojson'
-            data={buildingsAfter}
-          >
-            <Layer {...buildingsAfterStyle} />
-          </Source>
-        }
+        <Source
+          id='flood_level'
+          type='geojson'
+          data={floodLevel}
+        >
+          <Layer {...floodLevelStyle} />
+        </Source>
+        <Source
+          id='buildings_after'
+          type='geojson'
+          data={buildingsAfter}
+        >
+          <Layer {...buildingsAfterStyle} />
+        </Source>
       </MapGL>
     </div>
-  ), [viewport, changedViewport, showBuildings, showFlood])
+  ), [
+    viewport,
+    changedViewport,
+    floodLevelStyle,
+    buildingsBeforeStyle,
+    buildingsAfterStyle,
+  ])
 
   return compareMap
 }
