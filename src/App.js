@@ -17,6 +17,7 @@ const customTheme = createTheme({
 const App = () => {
   const [location, setLocation] = useState('')
   const [showBuildings, setShowBuildings] = useState(true)
+  const [showFlood, setShowFlood] = useState(true)
 
   return (
     <ThemeProvider theme={customTheme}>
@@ -26,12 +27,14 @@ const App = () => {
           <Controls
             setTargetLocation={setLocation}
             setShowMapBuildings={setShowBuildings}
+            setShowMapFlood={setShowFlood}
           />
         </Grid>
         <Grid item sm={10}>
           <CompareMap
             location={location}
             showBuildings={showBuildings}
+            showFlood={showFlood}
           />
         </Grid>
       </Grid>
