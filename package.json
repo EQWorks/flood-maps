@@ -12,13 +12,21 @@
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
-    "@mui/material": "^5.2.0",
+    "@eqworks/common-login": "0.9.0-alpha.1",
+    "@eqworks/react-labs": "^1.12.0",
+    "@material-ui/core": "^4.12.3",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/lab": "^4.0.0-alpha.60",
+    "@mui/material": "^5.2.3",
+    "@tailwindcss/postcss7-compat": "^2.1.2",
     "mapbox-gl": ">=0.32.1 <2.0.0",
     "mapbox-gl-compare": "^0.4.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-map-gl": "^5.2.5",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "tailwindcss": "yarn:@tailwindcss/postcss7-compat@^2.1.2",
     "use-debounce": "^7.0.1"
   },
   "eslintConfig": {
