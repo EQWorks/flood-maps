@@ -48,7 +48,7 @@ const buildingsAfterStyle = {
   },
 }
 
-const CompareMap = ({ location, showBuildings }) => {
+const CompareMap = ({ location, showBuildings, showFlood }) => {
   const [newViewport, setNewViewport] = useState({
     latitude: 49.068,
     longitude: -122.15,
@@ -144,13 +144,15 @@ const CompareMap = ({ location, showBuildings }) => {
           source='after-image'
           type='raster'
         />
-        <Source
-          id='flood_level'
-          type='geojson'
-          data={floodLevel}
-        >
-          <Layer {...floodLevelStyle} />
-        </Source>
+        {showFlood &&
+          <Source
+            id='flood_level'
+            type='geojson'
+            data={floodLevel}
+          >
+            <Layer {...floodLevelStyle} />
+          </Source>
+        }
         {showBuildings &&
           <Source
             id='buildings_after'
@@ -162,7 +164,7 @@ const CompareMap = ({ location, showBuildings }) => {
         }
       </MapGL>
     </div>
-  ), [viewport, changedViewport, showBuildings])
+  ), [viewport, changedViewport, showBuildings, showFlood])
 
   return compareMap
 }
@@ -170,11 +172,13 @@ const CompareMap = ({ location, showBuildings }) => {
 CompareMap.propTypes = {
   location: PropTypes.string,
   showBuildings: PropTypes.bool,
+  showFlood: PropTypes.bool,
 }
 
 CompareMap.defaultProps = {
   location: 'Area map',
   showBuildings: true,
+  showFlood: true,
 }
 
 export default CompareMap
