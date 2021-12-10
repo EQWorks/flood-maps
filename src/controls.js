@@ -13,7 +13,7 @@ import { alpha, styled } from '@mui/material/styles'
 import { LOCATIONS } from './constants'
 
 
-const CustomSwitch = styled(Switch)(({ theme }) => ({
+const FloodSwitch = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase.Mui-checked': {
     color: '#3887be',
     '&:hover': {
@@ -25,9 +25,22 @@ const CustomSwitch = styled(Switch)(({ theme }) => ({
   },
 }))
 
-const Controls = ({ setTargetLocation, setShowMapBuildings }) => {
+const BuildingSwitch = styled(Switch)(({ theme }) => ({
+  '& .MuiSwitch-switchBase.Mui-checked': {
+    color: '#be40bf',
+    '&:hover': {
+      backgroundColor: alpha('#be40bf', theme.palette.action.hoverOpacity),
+    },
+  },
+  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+    backgroundColor: '#be40bf',
+  },
+}))
+
+const Controls = ({ setTargetLocation, setShowMapBuildings, setShowMapFlood }) => {
   const [location, setLocation] = useState('Area map')
   const [showBuildings, setShowBuildings] = useState(true)
+  const [showFlodd, setShowFlood] = useState(true)
 
   return (
     <Box sx={{ margin: '20px' }}
@@ -73,8 +86,18 @@ const Controls = ({ setTargetLocation, setShowMapBuildings }) => {
         </Select>
       </FormControl>
       <FormControlLabel
+        value={showFlodd}
+        control={<FloodSwitch defaultChecked/>}
+        label='Show Flood'
+        labelPlacement='end'
+        onChange={() => {
+          setShowMapFlood(!showFlodd)
+          setShowFlood(!showFlodd)
+        }}
+      />
+      <FormControlLabel
         value={showBuildings}
-        control={<CustomSwitch defaultChecked/>}
+        control={<BuildingSwitch defaultChecked/>}
         label='Show Buildings'
         labelPlacement='end'
         onChange={() => {
@@ -89,6 +112,7 @@ const Controls = ({ setTargetLocation, setShowMapBuildings }) => {
 Controls.propTypes = {
   setTargetLocation: PropTypes.func.isRequired,
   setShowMapBuildings: PropTypes.func.isRequired,
+  setShowMapFlood: PropTypes.func.isRequired,
 }
 
 export default Controls

@@ -3,7 +3,7 @@ export const LOCATIONS = {
     latitude: 49.068,
     longitude: -122.15,
   },
-  'West Abbotsford' : {
+  'East Abbotsford' : {
     longitude: -122.249680,
     latitude: 49.016993,
   },
