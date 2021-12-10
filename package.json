@@ -9,6 +9,10 @@
     "build": "react-scripts build",
     "test": "echo 'No tests yet, shay-shay-shame~'"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/EQWorks/flood-maps"
+  },
   "dependencies": {
     "@emotion/react": "^11.6.0",
     "@emotion/styled": "^11.6.0",
