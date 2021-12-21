@@ -1,17 +1,16 @@
 import React, { useState } from 'react'
 
-import Grid from '@mui/material/Grid'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { Layout, makeStyles  } from '@eqworks/lumen-labs'
 
 import TopBar from './top-bar.jsx'
 import Controls from './controls.jsx'
 import CompareMap from './compare-map.jsx'
 
 
-const customTheme = createTheme({
-  typography: {
-    fontFamily: 'Open Sans',
-  },
+const classes = makeStyles({
+  headerClass: { boxShadow: '0 0 8px 0 rgba(0, 0, 0, 0.8)' },
+  contentClass: { width: '85%', height: '88vh' },
+  siderClass: { margin: '10px 20px 0px 30px',  width: '15%' },
 })
 
 const App = () => {
@@ -20,25 +19,27 @@ const App = () => {
   const [showFlood, setShowFlood] = useState(true)
 
   return (
-    <ThemeProvider theme={customTheme}>
-      <TopBar />
-      <Grid container spacing={2} >
-        <Grid item sm={2}>
+    <Layout>
+      <Layout.Header className={classes.headerClass}>
+        <TopBar />
+      </Layout.Header>
+      <Layout>
+        <Layout.Sider className={classes.siderClass}>
           <Controls
             setTargetLocation={setLocation}
             setShowMapBuildings={setShowBuildings}
             setShowMapFlood={setShowFlood}
           />
-        </Grid>
-        <Grid item sm={10}>
+        </Layout.Sider>
+        <Layout.Content className={classes.contentClass}>
           <CompareMap
             location={location}
             showBuildings={showBuildings}
             showFlood={showFlood}
           />
-        </Grid>
-      </Grid>
-    </ThemeProvider>
+        </Layout.Content>
+      </Layout>
+    </Layout>
   )
 }
 
