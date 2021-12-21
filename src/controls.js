@@ -1,111 +1,125 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 
-import Box from '@mui/material/Box'
-import MenuItem from '@mui/material/MenuItem'
-import FormControl from '@mui/material/FormControl'
-import Select from '@mui/material/Select'
-import Typography from '@mui/material/Typography'
-import Switch from '@mui/material/Switch'
-import FormControlLabel from '@mui/material/FormControlLabel'
-import { alpha, styled } from '@mui/material/styles'
+import { DropdownSelect, Icons, SwitchRound, makeStyles } from '@eqworks/lumen-labs'
 
 import { LOCATIONS } from './constants'
 
 
-const FloodSwitch = styled(Switch)(({ theme }) => ({
-  '& .MuiSwitch-switchBase.Mui-checked': {
-    color: '#3887be',
-    '&:hover': {
-      backgroundColor: alpha('#3887be', theme.palette.action.hoverOpacity),
-    },
-  },
-  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-    backgroundColor: '#3887be',
-  },
-}))
-
-const BuildingSwitch = styled(Switch)(({ theme }) => ({
-  '& .MuiSwitch-switchBase.Mui-checked': {
-    color: '#be40bf',
-    '&:hover': {
-      backgroundColor: alpha('#be40bf', theme.palette.action.hoverOpacity),
-    },
-  },
-  '& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
-    backgroundColor: '#be40bf',
-  },
-}))
+const classes = makeStyles({
+  date: { color: 'rgba(76, 76, 76)', marginLeft: '10px' },
+  selectDiv: { margin: '20px 0px 10px 0px' },
+  selectLabel: { marginBottom: '5px', fontSize: 'large' },
+  switchClass: { margin: '20px 0px 0px 0px', fontSize: 'large' },
+})
 
 const Controls = ({ setTargetLocation, setShowMapBuildings, setShowMapFlood }) => {
   const [location, setLocation] = useState('Area map')
   const [showBuildings, setShowBuildings] = useState(true)
-  const [showFlodd, setShowFlood] = useState(true)
+  const [showFlood, setShowFlood] = useState(true)
+
+  const locationData = useMemo(() => [
+    {
+      items: Object.keys(LOCATIONS).map(item => ({ title: item })),
+    }], [])
 
   return (
-    <Box sx={{ margin: '20px' }}
-    >
-      <Typography variant='subtitle1' sx={{ marginBottom: '5px' }}>Location</Typography>
-      <FormControl fullWidth>
-        <Select
-          labelId='location-label'
-          id='location-select'
-          value={location}
-          onChange={({ target: { value } }) => {
-            setTargetLocation(value)
-            setLocation(value)
+    <div>
+      <div className={classes.selectDiv}>
+        <p className={classes.selectLabel}>Location:</p>
+        <DropdownSelect
+          data={locationData}
+          size='lg'
+          setSelectedOption={{ title: location }}
+          endIcon={<Icons.ArrowDown size='md'/>}
+          onSelect={v => {
+            setLocation(v.title)
+            setTargetLocation(v.title)
           }}
-          sx={{ marginBottom: '20px' }}
-        > {Object.keys(LOCATIONS).map((loc, i) => (
-            <MenuItem key={i} value={loc}>{loc}</MenuItem>
-          ))}
-        </Select>
-      </FormControl>
-      <Typography variant='subtitle1' sx={{ marginBottom: '5px' }}>Before date</Typography>
-      <FormControl fullWidth>
-        <Select
-          labelId='before-date-label'
-          id='before-date-select'
-          value ='Monday, November 8'
-          // onChange={handleChange}
-          sx={{ marginBottom: '20px' }}
-        >
-          <MenuItem value='Monday, November 8'>Monday, November 8</MenuItem>
-        </Select>
-      </FormControl>
-      <Typography variant='subtitle1' sx={{ marginBottom: '5px' }}>After date</Typography>
-      <FormControl fullWidth>
-        <Select
-          labelId='after-date-label'
-          id='after-date-select'
-          value='Friday, November 19'
-          // onChange={handleChange}
-          sx={{ marginBottom: '20px' }}
-        >
-          <MenuItem value='Friday, November 19'>Friday, November 19</MenuItem>
-        </Select>
-      </FormControl>
-      <FormControlLabel
-        value={showFlodd}
-        control={<FloodSwitch defaultChecked/>}
-        label='Show Flood'
-        labelPlacement='end'
-        onChange={() => {
-          setShowMapFlood(!showFlodd)
-          setShowFlood(!showFlodd)
-        }}
-      />
-      <FormControlLabel
-        value={showBuildings}
-        control={<BuildingSwitch defaultChecked/>}
-        label='Show Buildings'
-        labelPlacement='end'
-        onChange={() => {
-          setShowMapBuildings(!showBuildings)
-          setShowBuildings(!showBuildings)
-        }}
-      />
-    </Box>
+          onDelete={() => {
+            setLocation('Area map')
+            setTargetLocation('Area map')
+          }}
+          placeholder='Select location'
+          classes={{
+            root: 'shadow-light-10 border-3 border-secondary-200 rounded-md p-10 m-5',
+            button: 'tracking-widest',
+            menu: 'w-full',
+          }}
+        />
+      </div>
+      <div className={classes.selectDiv}>
+        <p className={classes.selectLabel}>Before date:</p>
+        <p className={classes.date}>Monday, November 8</p>
+        {/* keep the following 2 DropdownSelect for future use
+        <DropdownSelect
+          data={[
+            {
+              items: [{ title: 'Monday, November 8' }],
+            },
+          ]}
+          size='lg'
+          setSelectedOption={{ title: 'Monday, November 8' }}
+          endIcon={<Icons.ArrowDown size='md'/>}
+          placeholder='Select before date'
+          classes={{
+            root: 'shadow-light-10 border-3 border-secondary-200 rounded-md',
+            button: 'tracking-widest',
+            menu: 'w-full',
+          }}
+        /> */}
+      </div>
+      <div className={classes.selectDiv}>
+        <p className={classes.selectLabel}>After date:</p>
+        <p className={classes.date}>Friday, November 19</p>
+        {/* <DropdownSelect
+          data={[
+            {
+              items: [{ title: 'Friday, November 19' }],
+            },
+          ]}
+          size='lg'
+          setSelectedOption={{ title: 'Friday, November 19' }}
+          endIcon={<Icons.ArrowDown size='md'/>}
+          placeholder='Select after date'
+          classes={{
+            root: 'shadow-light-10 border-3 border-secondary-200 rounded-md',
+            button: 'tracking-widest',
+            menu: 'w-full',
+          }}
+        /> */}
+      </div>
+      <div className={classes.switchClass}>
+        <SwitchRound
+          id='flood-switch'
+          checked={showFlood}
+          onChange={() => {
+            setShowMapFlood(!showFlood)
+            setShowFlood(!showFlood)
+          }}
+          label='Show Flood'
+          color='interactive'
+          classes={{
+            label: 'ml-2',
+          }}
+        />
+      </div>
+      <div className={classes.switchClass}>
+        <SwitchRound
+          id='buildings-switch'
+          checked={showBuildings}
+          onChange={() => {
+            setShowMapBuildings(!showBuildings)
+            setShowBuildings(!showBuildings)
+          }}
+          label='Show Buildings'
+          color='warning'
+          classes={{
+            label: 'ml-2',
+          }}
+        />
+      </div>
+    </div>
   )
 }
 
