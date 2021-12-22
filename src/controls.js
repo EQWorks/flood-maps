@@ -1,10 +1,14 @@
-import React, { useState, useMemo } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { DropdownSelect, Icons, SwitchRound, makeStyles } from '@eqworks/lumen-labs'
 
 import { LOCATIONS } from './constants'
 
+
+const locationData = [{
+  items: Object.keys(LOCATIONS).map(item => ({ title: item })),
+}]
 
 const classes = makeStyles({
   date: { color: 'rgba(76, 76, 76)', marginLeft: '10px' },
@@ -17,11 +21,6 @@ const Controls = ({ setTargetLocation, setShowMapBuildings, setShowMapFlood }) =
   const [location, setLocation] = useState('Area map')
   const [showBuildings, setShowBuildings] = useState(true)
   const [showFlood, setShowFlood] = useState(true)
-
-  const locationData = useMemo(() => [
-    {
-      items: Object.keys(LOCATIONS).map(item => ({ title: item })),
-    }], [])
 
   return (
     <div>
