@@ -7,6 +7,7 @@ import MapGL, { Source, Layer } from 'react-map-gl'
 import MapboxCompare from 'mapbox-gl-compare'
 import 'mapbox-gl/dist/mapbox-gl.css'
 import 'mapbox-gl-compare/dist/mapbox-gl-compare.css'
+import './style.css'
 
 import { useDebounce } from 'use-debounce'
 

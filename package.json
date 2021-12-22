@@ -14,15 +14,18 @@
     "url": "https://github.com/EQWorks/flood-maps"
   },
   "dependencies": {
-    "@emotion/react": "^11.6.0",
-    "@emotion/styled": "^11.6.0",
-    "@mui/material": "^5.2.0",
+    "@eqworks/lumen-labs": "0.1.0-alpha.13",
+    "@tailwindcss/postcss7-compat": "^2.1.2",
+    "autoprefixer": "^9.8.6",
     "mapbox-gl": ">=0.32.1 <2.0.0",
     "mapbox-gl-compare": "^0.4.0",
+    "postcss": "^7",
+    "prop-types": "^15.7.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-map-gl": "^5.2.5",
     "react-scripts": "4.0.3",
+    "tailwindcss": "yarn:@tailwindcss/postcss7-compat@^2.1.2",
     "use-debounce": "^7.0.1"
   },
   "eslintConfig": {

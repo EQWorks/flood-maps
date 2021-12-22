@@ -1,43 +1,41 @@
 import React from 'react'
 
-import AppBar from '@mui/material/AppBar'
-import Toolbar from '@mui/material/Toolbar'
-import Box from '@mui/material/Box'
-import Typography from '@mui/material/Typography'
-import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { makeStyles } from '@eqworks/lumen-labs'
 
 import EQlogo from './images/eq.png'
 
 
-const darkTheme = createTheme({
-  palette: {
-    mode: 'dark',
-    primary: {
-      main: '#000000',
-    },
-  },
-  typography: {
+const classes = makeStyles({
+  appBar: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'black',
+    color: 'white',
     fontFamily: 'Open Sans',
+    fontSize: '1.5rem',
+    height: '80px',
+    padding: '15px 25px 15px 25px',
+  },
+  logo: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  logoLabel: {
+    marginLeft: '10px',
   },
 })
 
 const TopBar = () => {
   return (
-    <ThemeProvider theme={darkTheme}>
-      <AppBar position='static' color='primary' enableColorOnDark sx={{ p: 1 }}>
-        <Toolbar>
-          <Box>
-            <img alt='EQ Logo' src={EQlogo} width={50} height={50} />
-          </Box>
-          <Typography variant='h5' sx={{ ml: 2, flexGrow: 1 }}>
-              EQ Works
-          </Typography>
-          <Typography variant='h5'>
-              British Columbia Flood Maps 2021
-          </Typography>
-        </Toolbar>
-      </AppBar>
-    </ThemeProvider>
+    <div className={classes.appBar}>
+      <div className={classes.logo}>
+        <img alt='EQ Logo' src={EQlogo} width={50} height={50} />
+        <p className={classes.logoLabel}>EQ Works</p>
+      </div>
+      <p>British Columbia Flood Maps 2021</p>
+    </div>
   )
 }
 
