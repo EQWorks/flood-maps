@@ -16,7 +16,7 @@ import buildingsBefore from './data/bb_abbots.json'
 import buildingsAfter from './data/bldgs_affected.json'
 
 
-const MAPBOX_TOKEN = process.env.REACT_APP_MAPBOX_ACCESS_TOKEN || ''
+const MAPBOX_TOKEN = import.meta.env.VITE_MAPBOX_ACCESS_TOKEN || ''
 const style = {
   position: 'absolute',
   top: 100,

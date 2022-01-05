@@ -1,10 +1,9 @@
 module.exports = {
-  'parser': '@babel/eslint-parser',
-  'env': {
-    'browser': true,
-    'es6': true,
-    'node': true,
-    'jest': true,
+  env: {
+    browser: true,
+    es6: true,
+    node: true,
+    jest: true,
   },
   settings: {
     react: {
@@ -12,7 +11,7 @@ module.exports = {
       version: 'detect',
     },
   },
-  'extends': [
+  extends: [
     'eslint:recommended',
     'plugin:react/recommended',
     'plugin:react-hooks/recommended',
@@ -20,25 +19,21 @@ module.exports = {
     'plugin:import/errors',
     'plugin:import/warnings',
   ],
-  globals: {
-    Atomics: 'readonly',
-    SharedArrayBuffer: 'readonly',
-  },
-  'parserOptions': {
-    'ecmaFeatures': {
+  parserOptions: {
+    ecmaFeatures: {
       jsx: true,
     },
-    'ecmaVersion': 6,
-    'sourceType': 'module',
+    ecmaVersion: 6,
+    sourceType: 'module',
   },
-  'plugins': [
+  plugins: [
     'react',
     'react-hooks',
     'import',
   ],
-  'rules': {
+  rules: {
     'import/newline-after-import': ['error', { 'count': 2 }],
-    'indent': [
+    indent: [
       'error',
       2,
     ],
@@ -46,12 +41,12 @@ module.exports = {
       'error',
       'unix',
     ],
-    'quotes': [
+    quotes: [
       'error',
       'single',
       { 'avoidEscape': true },
     ],
-    'semi': [
+    semi: [
       'error',
       'never',
     ],

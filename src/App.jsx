@@ -3,9 +3,9 @@ import React, { useState } from 'react'
 import Grid from '@mui/material/Grid'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 
-import TopBar from './top-bar'
-import Controls from './controls'
-import CompareMap from './compare-map'
+import TopBar from './top-bar.jsx'
+import Controls from './controls.jsx'
+import CompareMap from './compare-map.jsx'
 
 
 const customTheme = createTheme({
