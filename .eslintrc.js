@@ -20,11 +20,7 @@ module.exports = {
     'plugin:import/warnings',
   ],
   parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: 6,
-    sourceType: 'module',
+    ecmaVersion: 2021,
   },
   plugins: [
     'react',
